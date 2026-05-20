@@ -22,7 +22,7 @@ export default function Home() {
         {/* HERO SECTION */}
         <section id="about" className="flex flex-col items-center text-center pt-10">
           <div className="text-emerald-400 text-xs md:text-sm font-mono mb-6 tracking-widest uppercase">
-            $ deploy-cloud-infra --platform=gcp --scale=auto
+            $ deploy-cloud-infra --platform=gcp&aws --scale=auto
           </div>
           
           <h1 className="text-5xl md:text-7xl font-mono font-bold mb-2 tracking-tighter">
@@ -71,13 +71,50 @@ export default function Home() {
               { stat: "5+", label: "Cloud Certifications" },
               { stat: "100%", label: "Uptime on Deployments" },
               { stat: "4+", label: "Major Projects Delivered" },
-              { stat: "Cloud Computing", label: "Bangkit Academy 2024" }
-            ].map((item, i) => (
-              <div key={i} className="border border-gray-800 bg-[#1a1a1a] rounded-xl p-6 text-center hover:border-cyan-500/50 transition-colors">
-                <div className="text-3xl font-bold text-cyan-400 mb-2">{item.stat}</div>
-                <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold">{item.label}</div>
-              </div>
-            ))}
+              { stat: "Cloud Computing", label: "Bangkit Academy 2024" },
+              { 
+                stat: "AWS Certified Practitioner", 
+                label: "Jan 2025 - Jan 2029", 
+                span: "col-span-2 md:col-span-2", // Forces it to stretch
+                link: "https://www.credly.com/badges/9740df02-bbda-46a1-947b-1fc87913304e/linked_in_profile" // Add your cert URL
+              },
+              { 
+                stat: "AWS Certified Developer Associate", 
+                label: "May 2025 - May 2029", 
+                span: "col-span-2 md:col-span-2", // Forces it to stretch
+                link: "https://www.credly.com/badges/983af7ca-c15f-4b36-aedd-343fe895efc6/linked_in_profile" // Add your cert URL
+              }
+            ].map((item, i) => {
+              // Dynamic Tag: Renders an <a> if there is a link, otherwise a <div>
+              const isLink = !!item.link;
+              const CardTag = isLink ? 'a' : ('div' as any);
+              const linkProps = isLink ? { href: item.link, target: "_blank", rel: "noopener noreferrer" } : {};
+
+              return (
+                <CardTag
+                  key={i}
+                  {...linkProps}
+                  className={`border border-gray-800 bg-[#1a1a1a] rounded-xl p-6 text-center transition-all ${
+                    item.span ? item.span : 'col-span-1'
+                  } ${
+                    isLink 
+                      ? 'hover:border-cyan-500/50 hover:bg-[#1f1f1f] cursor-pointer group block' 
+                      : 'hover:border-gray-700'
+                  }`}
+                >
+                  <div className={`font-bold text-cyan-400 mb-2 ${item.span ? 'text-2xl md:text-3xl' : 'text-3xl'} ${isLink ? 'group-hover:text-cyan-300' : ''}`}>
+                    {item.stat}
+                  </div>
+                  <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-2">
+                    {item.label}
+                    {/* Adds a small external link icon if it's clickable */}
+                    {isLink && (
+                      <svg className="w-3 h-3 text-gray-600 group-hover:text-cyan-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    )}
+                  </div>
+                </CardTag>
+              );
+            })}
           </div>
         </section>
 
@@ -400,7 +437,7 @@ export default function Home() {
         </div>
 
         <div className="max-w-5xl mx-auto pt-8 border-t border-gray-800/50 flex flex-col md:flex-row justify-between items-center text-gray-500 text-xs">
-          <p>Copyright © 2026. Designed and Developed by <span className="text-cyan-400 font-medium">Eric.io</span></p>
+          <p>Copyright © 2026. Designed and Developed by <span className="text-cyan-400 font-medium">Eric Vincent Kho</span></p>
           <p className="mt-2 md:mt-0">Architecting Scalable Cloud Platforms</p>
         </div>
       </footer>
