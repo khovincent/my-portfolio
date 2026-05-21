@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ERIC VINCENT KHO",
+  title: "Eric Vincent Kho - Cloud & MLOps Engineer",
   description: "PORTFOLIO WEBSITE OF ERIC VINCENT KHO",
 };
 
